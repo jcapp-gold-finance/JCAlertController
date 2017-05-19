@@ -145,24 +145,33 @@
     [btn setTitleColor:color forState:UIControlStateNormal];
 }
 - (IBAction)btnAction:(id)sender {
-    __weak __typeof__(self) selfWeak = self;
-    [self dismissViewControllerAnimated:YES completion:^{
-        if (sender == selfWeak.btn1) {
-            if (selfWeak.actions.count >= 1) {
-                JCAlertAction *action = [self.actions objectAtIndex:0];
-                if (action.handler) {
-                    action.handler(action);
-                }
-            }
-        }else if (sender == selfWeak.btn2){
-            if (selfWeak.actions.count >= 2) {
-                JCAlertAction *action = [self.actions objectAtIndex:1];
-                if (action.handler) {
-                    action.handler(action);
-                }
+    if (_preferredStyle == JCAlertControllerStyleForcedUpgradeAlert) {
+        if (self.actions.count >= 1) {
+            JCAlertAction *action = [self.actions objectAtIndex:0];
+            if (action.handler) {
+                action.handler(action);
             }
         }
-    }];
+    }else{
+        __weak __typeof__(self) selfWeak = self;
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (sender == selfWeak.btn1) {
+                if (selfWeak.actions.count >= 1) {
+                    JCAlertAction *action = [self.actions objectAtIndex:0];
+                    if (action.handler) {
+                        action.handler(action);
+                    }
+                }
+            }else if (sender == selfWeak.btn2){
+                if (selfWeak.actions.count >= 2) {
+                    JCAlertAction *action = [self.actions objectAtIndex:1];
+                    if (action.handler) {
+                        action.handler(action);
+                    }
+                }
+            }
+        }];
+    }
 }
 #pragma mark - setter and getter Methods
 - (NSArray *)actions{

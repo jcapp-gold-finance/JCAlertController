@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, JCAlertActionStyle) {
 };
 
 typedef NS_ENUM(NSInteger, JCAlertControllerStyle) {
-    JCAlertControllerStyleAlert
+    JCAlertControllerStyleAlert = 0,
+    JCAlertControllerStyleForcedUpgradeAlert
 };
 
 @interface JCAlertAction: NSObject
